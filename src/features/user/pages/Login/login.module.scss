@@ -1,0 +1,319 @@
+.login_page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('../../../../assets/Images/freepik-export-20241121073301n3bx.png');
+  background-size: cover;
+  background-position: center;
+  
+  // Keyframe animations
+  @keyframes slideInFromRight {
+      0% {
+          opacity: 0;
+          transform: translateX(100px) scale(0.9);
+      }
+      70% {
+          opacity: 0.7;
+          transform: translateX(-10px) scale(1.02);
+      }
+      100% {
+          opacity: 1;
+          transform: translateX(0) scale(1);
+      }
+  }
+
+  @keyframes fadeInBlur {
+      0% {
+          opacity: 0;
+          filter: blur(15px);
+      }
+      100% {
+          opacity: 1;
+          filter: blur(0);
+      }
+  }
+
+  .login__logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ffff; // Matching the blue used in your login button
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    
+    // Apply the Oi font
+    font-family: "Bruno Ace SC", sans-serif; 
+    font-weight: 400;
+    font-style: normal;
+    
+    // Add hover effect
+    cursor: pointer;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #0056b3; // Slightly darker blue on hover
+      opacity: 0.8;
+    }
+
+    // Ensure it appears above other elements
+    z-index: 10;
+  }
+
+  
+  
+  .login_form {
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    padding: 3rem;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    margin-right: auto;
+    margin-left: 100px;
+
+    // Animation properties
+    animation: 
+      slideInFromRight 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards,
+      fadeInBlur 0.6s ease-out forwards;
+    transform-origin: center right;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(0deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+      transform: rotate(-45deg);
+      pointer-events: none; // Ignore pointer events for this pseudo-element
+    }
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #fff;
+      font-size: 2rem;
+      font-weight: 300;
+      letter-spacing: 1px;
+      opacity: 0;
+      animation: fadeInBlur 0.6s ease-out 0.4s forwards;
+    }
+
+    .form_group {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .input_wrapper {
+        position: relative;
+        opacity: 0;
+        animation: fadeInBlur 0.6s ease-out 0.6s forwards;
+
+        input {
+          width: 95%;
+          padding: 0.75rem 1rem;
+          background-color: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 8px;
+          color: #fff;
+          font-size: 1rem;
+          transition: all 0.3s ease;
+          outline: none;
+
+          &::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+          }
+
+          &:focus {
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+          }
+        }
+      }
+
+      .login_button {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+        margin-top: 1rem;
+        opacity: 0;
+        animation: fadeInBlur 0.6s ease-out 0.8s forwards;
+
+        &:hover {
+          background-color: #0056b3;
+          transform: translateY(-2px);
+        }
+
+        &:active {
+          transform: translateY(1px);
+        }
+      }
+    }
+
+    .divider {
+      text-align: center;
+      margin: 1.5rem 0;
+      position: relative;
+      opacity: 0;
+      animation: fadeInBlur 0.6s ease-out 1s forwards;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 45%;
+        height: 1px;
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 50%;
+        width: 45%;
+        height: 1px;
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      span {
+        position: relative;
+        z-index: 1;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 0 0.5rem;
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+
+    .google_button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 0.75rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      opacity: 0;
+      animation: fadeInBlur 0.6s ease-out 1.2s forwards;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+      }
+
+      &:active {
+        transform: translateY(1px);
+      }
+
+      .google_icon {
+        margin-right: 0.5rem;
+        font-size: 1.2rem;
+      }
+    }
+
+    .signup_link {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: rgba(255, 255, 255, 0.7);
+      opacity: 0;
+      animation: fadeInBlur 0.6s ease-out 1.4s forwards;
+
+      a {
+        color: #007bff;
+        text-decoration: none;
+        transition: color 0.3s;
+
+        &:hover {
+          color: #0056b3;
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .input_error {
+      
+      color: rgba(255, 0, 0, 0.6);
+      transition: all 0.3s ease; // Smooth transition for styling changes
+      animation: 
+          fadeInBlur 0.5s ease-out forwards,
+          shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+           
+      &::placeholder {
+        color: rgba(255, 0, 0, 0.6); // Red placeholder color for visual consistency
+      }
+
+      @keyframes shake {
+        10%, 90% {
+            transform: translate3d(-1px, 0, 0);
+        }
+        
+        20%, 80% {
+            transform: translate3d(2px, 0, 0);
+        }
+
+        30%, 50%, 70% {
+            transform: translate3d(-4px, 0, 0);
+        }
+
+        40%, 60% {
+            transform: translate3d(4px, 0, 0);
+        }
+    }
+    }
+    
+    .error_message {
+      // background-color: rgba(255, 0, 0, 0.2);
+      // border: 1px solid rgba(255, 0, 0, 0.5);
+      color: #ff4d4d;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      opacity: 0;
+      animation: 
+          fadeInBlur 0.5s ease-out forwards,
+          shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+      
+      @keyframes shake {
+          10%, 90% {
+              transform: translate3d(-1px, 0, 0);
+          }
+          
+          20%, 80% {
+              transform: translate3d(2px, 0, 0);
+          }
+
+          30%, 50%, 70% {
+              transform: translate3d(-4px, 0, 0);
+          }
+
+          40%, 60% {
+              transform: translate3d(4px, 0, 0);
+          }
+      }
+  }
+
+ 
+}
+}

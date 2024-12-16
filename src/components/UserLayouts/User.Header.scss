@@ -1,0 +1,165 @@
+/* src/components/User.Header.scss */
+.header {
+    background-color: #000;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 1px 5px rgba(255, 255, 255, 0.1);
+  
+    &__container {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr; // Three equal columns
+      align-items: center;
+      max-width: auto;
+      margin: 0 ;
+      padding: 0.2rem 2rem;
+      height: 60px;
+    }
+  
+    &__logo {
+      grid-column: 1; // First column
+      justify-self: start; // Align to the left
+      font-size: 1.25rem;
+      font-weight: bold;
+      
+      a {
+        color: #fff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+  
+        &:hover {
+          color: #4a90e2;
+        }
+      }
+    }
+  
+    &__nav {
+      grid-column: 2; // Middle column
+      justify-self: center; // Center the navigation
+      display: flex;
+      gap: 1.5rem;
+    }
+  
+    &__link {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      position: relative;
+      transition: color 0.3s ease;
+  
+      &::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -3px;
+        left: 0;
+        background-color: #4a90e2;
+        transition: width 0.3s ease;
+      }
+  
+      &:hover {
+        color: #4a90e2;
+  
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  
+    &__actions {
+      grid-column: 3; // Last column
+      justify-self: end; // Align to the right
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+  
+    &__button {
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.8rem;
+      transition: all 0.3s ease;
+  
+      &--login {
+        background-color: transparent;
+        color: #fff;
+        border: 2px solid #fff;
+  
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+      }
+  
+      &--register {
+        background-color: #4a90e2;
+        color: #fff;
+        border: 2px solid #4a90e2;
+  
+        &:hover {
+          background-color: #3a7bd5;
+          border-color: #3a7bd5;
+        }
+      }
+    }
+  }
+
+  // .header {
+  //   background-color: #fff; // Default background color
+  //   color: #333;
+  
+  //   &--signup {
+  //     background-color: #fff; // White background
+  //     color: #0000; // Change text color if needed
+  
+  //     .header__nav,
+  //     .header__actions {
+  //       display: none; // Hide navigation and actions
+  //     }
+  //   }
+  // }
+  
+  
+  // Responsive adjustments
+  @media (max-width: 768px) {
+    .header {
+      &__container {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        padding: 0.5rem;
+        height: auto;
+      }
+  
+      &__logo {
+        grid-column: 1;
+        justify-self: center;
+      }
+  
+      &__nav {
+        grid-column: 1;
+        justify-self: center;
+        gap: 1rem;
+        margin: 0.5rem 0;
+        flex-wrap: wrap;
+      }
+  
+      &__actions {
+        grid-column: 1;
+        justify-self: center;
+        flex-direction: column;
+        width: 100%;
+  
+        .header__button {
+          width: 100%;
+          text-align: center;
+          margin-bottom: 0.5rem;
+        }
+      }
+    }
+  }

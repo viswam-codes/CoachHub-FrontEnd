@@ -1,0 +1,273 @@
+/* src/pages/signup/Signup.module.scss */
+
+@use 'sass:color';
+// Color Variables
+$primary-color: #4a90e2;
+$secondary-color: #3a7bd5;
+$background-color: #f4f4f4;
+$text-color: #333;
+$input-border-color: #ddd;
+
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeSlideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.signup {
+  &__container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    background-color: $background-color;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  &__form__container {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background-color: white;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.05);
+  }
+
+  &__form__wrapper {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 8px;
+
+    opacity: 1; // Ensure form is always visible
+    animation: fadeSlideUp 0.8s ease-out;
+  }
+
+  &__title {
+    color: $text-color;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  &__subtitle {
+    color: darken($input-border-color, 40%);
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__input {
+    // MUI TextField custom styling
+    .MuiOutlinedInput-root {
+      &.Mui-focused {
+        .MuiOutlinedInput-notchedOutline {
+          border-color: $primary-color;
+        }
+      }
+    }
+
+    .MuiInputLabel-outlined {
+      &.Mui-focused {
+        color: $primary-color;
+      }
+    }
+  }
+
+  &__button {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background-color: $primary-color;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: $secondary-color;
+    }
+  }
+
+  &__login__link {
+    text-align: center;
+    margin-top: 1rem;
+    // color: darken($input-border-color, 50%);
+
+    a {
+      color: $primary-color;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $secondary-color;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: $primary-color;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    
+    // Apply the Oi font
+    font-family: "Bruno Ace SC", sans-serif;  // Use the font directly from Google Fonts
+    font-weight: 400;  // Regular weight
+    font-style: normal;
+  }
+
+  &__image__container {
+    width: 50%;
+    background-color: $primary-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    animation: fadeSlideDown 0.8s ease-out;
+  }
+  
+  &__image__placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; // This ensures the image covers the container while maintaining aspect ratio
+    object-position: center; // Centers the image within the container
+  }
+
+  // Color variables
+$google-blue: #4285F4;
+// $google-blue-hover: darken(#4285F4, 10%);
+$white: #FFFFFF;
+$button-border-color: rgba(0, 0, 0, 0.1);
+
+// Color variables
+$google-blue: #4285F4;
+// $google-blue-hover: darken(#4285F4, 10%);
+$white: #FFFFFF;
+$button-border-color: rgba(0, 0, 0, 0.1);
+
+.google_signin_button {
+  // Ensure specificity and override Material-UI styles
+  &.MuiButton-root {
+    // Reset and base styles
+    position: relative !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+    
+    // Button structure
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    
+    // Dimensions and spacing
+    height: 48px !important;
+    border-radius: 4px !important;
+    padding: 0 16px !important;
+    margin-top: 1rem !important;
+    
+    // Typography
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    
+    // Outline and border
+    border: 1px solid #{$button-border-color} !important;
+    background-color: #{$white} !important;
+    
+    // Transition for smooth hover effects
+    transition: all 0.3s ease !important;
+    
+    // Google Icon styling
+    .MuiButton-startIcon {
+      position: absolute !important;
+      left: 16px !important;
+      
+      svg {
+        width: 20px !important;
+        height: 20px !important;
+      }
+    }
+    
+    // Text styling
+    .MuiButton-label {
+      margin-left: 30px !important;
+      color: rgba(0, 0, 0, 0.54) !important;
+    }
+    
+    // Hover and focus states
+    &:hover {
+      background-color: #{color.scale($white, $lightness: -5%)} !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    // Active/pressed state
+    &:active {
+      background-color: #{color.scale($white, $lightness: -10%)} !important;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+    }
+    
+    // Focus state
+    &:focus {
+      outline: none !important;
+      box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.3) !important;
+    }
+    
+    // Disabled state
+    &.Mui-disabled {
+      opacity: 0.6 !important;
+      cursor: not-allowed !important;
+    }
+  }
+}
+
+
+  // Responsive Design
+  @media (max-width: 768px) {
+    &__container {
+      flex-direction: column;
+    }
+
+    &__form__container,
+    &__image__container {
+      width: 100%;
+      height: 50%;
+    }
+
+    &__form__wrapper {
+      padding: 1rem;
+    }
+
+    &.MuiButton-root {
+      width: 100% !important;
+      
+      .MuiButton-startIcon {
+        left: 12px !important;
+      }
+    }
+  }
+  }

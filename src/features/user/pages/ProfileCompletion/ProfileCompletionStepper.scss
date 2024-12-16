@@ -1,0 +1,135 @@
+// ProfileCompletionStepper.scss
+$primary-blue: #3B82F6;
+$light-blue: #EFF6FF;
+$gray-border: #D1D5DB;
+$text-gray: #4B5563;
+$white: #FFFFFF;
+
+/* ProfileCompletionStepper.scss */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    backdrop-filter: blur(8px); /* Blurred background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Ensure it appears above other content */
+  }
+  
+  .modal-content {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 90%;
+  }
+  
+
+.profile-completion-container {
+  max-width: 36rem;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background-color: $white;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border-radius: 0.75rem;
+
+  .step-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+
+    .step-title {
+      width: 50%;
+      text-align: center;
+      padding: 0.5rem;
+      color: lighten($text-gray, 20%);
+      transition: all 0.3s ease;
+
+      &.active {
+        color: $primary-blue;
+        font-weight: bold;
+        border-bottom: 2px solid $primary-blue;
+      }
+    }
+  }
+
+  .goal-selection {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+
+    .goal-button {
+      padding: 1rem;
+      border: 2px solid $gray-border;
+      border-radius: 0.5rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+
+      &:hover {
+        border-color: lighten($primary-blue, 10%);
+      }
+
+      &.selected {
+        border-color: $primary-blue;
+        background-color: $light-blue;
+        color: $primary-blue;
+      }
+    }
+  }
+
+  .personal-details {
+    .input-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+
+      select, input {
+        padding: 0.5rem;
+        border: 1px solid $gray-border;
+        border-radius: 0.25rem;
+        width: 100%;
+      }
+    }
+
+    .action-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+
+      .back-button {
+        display: flex;
+        align-items: center;
+        color: $text-gray;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: $primary-blue;
+        }
+      }
+
+      .submit-button {
+        display: flex;
+        align-items: center;
+        background-color: $primary-blue;
+        color: $white;
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        transition: background-color 0.3s ease;
+
+        &:hover:not(:disabled) {
+          background-color: darken($primary-blue, 10%);
+        }
+
+        &:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}
