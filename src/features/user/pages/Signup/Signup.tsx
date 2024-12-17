@@ -14,7 +14,7 @@ import styles from './Signup.module.scss';
 import signupImage from '../../../../assets/Images/girl-holding-blue-rolled-yoga-matte-light-dumbbell.jpg'; // Adjust the path as needed
 import { useAppDispatch,useAppSelector } from '../../../../hooks/hooks';
 import { signupUser, verifyOtp } from '../../services/userService';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import OtpModal from '../OtpModal/OtpModal';
 import { Google as GoogleIcon } from '@mui/icons-material';
 import {CircularProgress} from '@mui/material';
@@ -273,7 +273,7 @@ const Signup = () => {
             </Button>
 
             <Typography variant="body2" className={styles.signup__login__link}>
-              Already have an account? <a href="/login">Log In</a>
+              Already have an account? <Link to="/login">Log In</Link>
             </Typography>
           </Box>
         </Box>

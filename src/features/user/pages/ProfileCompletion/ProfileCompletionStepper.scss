@@ -4,6 +4,65 @@ $light-blue: #EFF6FF;
 $gray-border: #D1D5DB;
 $text-gray: #4B5563;
 $white: #FFFFFF;
+$dark-background: #121212;
+$dark-surface: #1E1E1E;
+$primary-blue: #4A90E2;
+$accent-blue: #6AB0FF;
+$text-light: #E0E0E0;
+$text-muted: #888888;
+$border-color: #333333;
+$white: #FFFFFF;
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%) scale(0.6);
+    opacity: 0;
+  }
+  80% {
+    transform: translateX(10%) scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes buttonHoverPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes stepperTransition {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes letterSlideIn {
+  0% {
+  opacity: 0;
+  transform: translateX(100%) rotate(20deg);
+  }
+  80% {
+  opacity: 0.8;
+  transform: translateX(-5%) rotate(-10deg);
+  }
+  100% {
+  opacity: 1;
+  transform: translateX(0) rotate(0);
+  }
+  }
+
 
 /* ProfileCompletionStepper.scss */
 .modal-backdrop {
@@ -21,115 +80,237 @@ $white: #FFFFFF;
   }
   
   .modal-content {
-    background: #fff;
+    background: transparent;
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    // box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     max-width: 600px;
     width: 90%;
+
+    animation: slideInFromLeft 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    transform-origin: center center;
+
+    h1 {
+      color: #ffff;
+      font-family: "Bruno Ace SC", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      margin-left: 85px;
+      display: flex;
+      overflow: hidden;
+      span {
+        display: inline-block;
+        opacity: 0;
+        animation: letterSlideIn 0.8s ease-out forwards;
+      }
+      }
   }
   
 
-.profile-completion-container {
-  max-width: 36rem;
-  margin: 0 auto;
-  padding: 1.5rem;
-  background-color: $white;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  border-radius: 0.75rem;
-
-  .step-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1.5rem;
-
-    .step-title {
-      width: 50%;
-      text-align: center;
-      padding: 0.5rem;
-      color: lighten($text-gray, 20%);
-      transition: all 0.3s ease;
-
-      &.active {
-        color: $primary-blue;
-        font-weight: bold;
-        border-bottom: 2px solid $primary-blue;
+  .profile-completion-container {
+    max-width: 36rem;
+    margin: 0 auto;
+    padding: 1.5rem;
+    background: rgba(20, 20, 20, 0.5);
+    color: $text-light;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    border-radius: 0.75rem;
+    animation: stepperTransition 0.5s ease-out;
+    position: relative;
+    overflow: hidden;
+  
+    // Subtle background glow effect
+    &::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle at center, 
+        rgba($primary-blue, 0.1) 0%, 
+        transparent 70%
+      );
+      z-index: 1;
+      pointer-events: none;
+    }
+  
+    .step-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid $border-color;
+  
+      .step-title {
+        width: 50%;
+        text-align: center;
+        padding: 0.5rem;
+        color: $text-muted;
+        transition: all 0.3s ease;
+        position: relative;
+  
+        &.active {
+          color: $primary-blue;
+          font-weight: bold;
+  
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 50%;
+            height: 3px;
+            background-color: $primary-blue;
+            transform: translateX(-50%);
+          }
+        }
       }
     }
-  }
-
-  .goal-selection {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-
-    .goal-button {
-      padding: 1rem;
-      border: 2px solid $gray-border;
-      border-radius: 0.5rem;
-      transition: all 0.3s ease;
-      cursor: pointer;
-
-      &:hover {
-        border-color: lighten($primary-blue, 10%);
-      }
-
-      &.selected {
-        border-color: $primary-blue;
-        background-color: $light-blue;
-        color: $primary-blue;
-      }
-    }
-  }
-
-  .personal-details {
-    .input-grid {
+  
+    .goal-selection {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 1rem;
-
-      select, input {
-        padding: 0.5rem;
-        border: 1px solid $gray-border;
-        border-radius: 0.25rem;
-        width: 100%;
+  
+      .goal-button {
+        padding: 1rem;
+        border: 2px solid $border-color;
+        border-radius: 0.5rem;
+        background-color: $dark-background;
+        color: $text-light;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+  
+        &:hover {
+          border-color: $accent-blue;
+          transform: translateY(-3px);
+          animation: buttonHoverPulse 0.5s ease-in-out;
+          
+          &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+              120deg, 
+              transparent, 
+              rgba(255,255,255,0.1), 
+              transparent
+            );
+            transition: all 0.6s;
+            left: 100%;
+          }
+        }
+  
+        &.selected {
+          border-color: $primary-blue;
+          background-color: rgba($primary-blue, 0.2);
+          color: $accent-blue;
+          box-shadow: 0 5px 15px rgba($primary-blue, 0.3);
+        }
       }
     }
-
-    .action-buttons {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 1rem;
-
-      .back-button {
-        display: flex;
-        align-items: center;
-        color: $text-gray;
-        transition: color 0.3s ease;
-
-        &:hover {
-          color: $primary-blue;
+  
+    .personal-details {
+      .input-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+  
+        select, input {
+          padding: 0.5rem;
+          border: 1px solid $border-color;
+          border-radius: 0.25rem;
+          width: 90%;
+          background-color: $dark-background;
+          color: $text-light;
+          transition: all 0.3s ease;
+  
+          &:focus {
+            border-color: $primary-blue;
+            box-shadow: 0 0 0 2px rgba($primary-blue, 0.5);
+            outline: none;
+          }
+  
+          &::placeholder {
+            color: $text-muted;
+          }
         }
       }
-
-      .submit-button {
-        display: flex;
-        align-items: center;
-        background-color: $primary-blue;
-        color: $white;
-        padding: 0.5rem 1rem;
-        border-radius: 0.25rem;
-        transition: background-color 0.3s ease;
-
-        &:hover:not(:disabled) {
-          background-color: darken($primary-blue, 10%);
+      input[type="number"] {
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+          display: none;
+          margin: 0;
         }
-
-        &:disabled {
-          opacity: 0.5;
-          cursor: not-allowed;
+      
+       
+      }
+  
+      .action-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
+  
+        .back-button {
+          display: flex;
+          align-items: center;
+          background-color: $dark-background;
+          color: $text-light; // Changed from $text-muted to $text-light to match theme
+          transition: all 0.3s ease;
+        
+          &:hover {
+            color: $accent-blue;
+            transform: translateX(-5px);
+          }
+        }
+  
+        .submit-button {
+          display: flex;
+          align-items: center;
+          background-color: $primary-blue;
+          color: $white;
+          padding: 0.5rem 1rem;
+          border-radius: 0.25rem;
+          transition: all 0.3s ease;
+          position: relative;
+          overflow: hidden;
+  
+          &:hover:not(:disabled) {
+            background-color: $accent-blue;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba($primary-blue, 0.4);
+            
+            &::before {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: -100%;
+              width: 100%;
+              height: 100%;
+              background: linear-gradient(
+                120deg, 
+                transparent, 
+                rgba(255,255,255,0.2), 
+                transparent
+              );
+              transition: all 0.6s;
+              left: 100%;
+            }
+          }
+  
+          &:disabled {
+            background-color: darken($dark-background, 10%);
+            color: $text-muted;
+            cursor: not-allowed;
+            opacity: 0.5;
+          }
         }
       }
     }
   }
-}

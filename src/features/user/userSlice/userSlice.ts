@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { signupUser, loginUser } from '../services/userService';
+import { completeUserProfile } from '../services/userService';
 
 interface UserState {
   user: {
@@ -60,6 +61,22 @@ const userSlice = createSlice({
       .addCase(signupUser.rejected, (state, action: PayloadAction<any>) => {
         state.loading = false;
         state.error = action.payload || 'An error occurred during signup';
+      })
+
+
+      .addCase(completeUserProfile.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(completeUserProfile.fulfilled, (state, action) => {
+        state.loading = false;
+        if (state.user) {
+          state.user = { ...state.user, ...action.payload }; // Update user state
+        }
+      })
+      .addCase(completeUserProfile.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload?.message || 'An error occurred during profile completion';
       });
   },
 });

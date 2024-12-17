@@ -1,6 +1,8 @@
 import React, { useState, ChangeEvent } from 'react';
 import { Check, ChevronRight, ChevronLeft } from 'lucide-react';
 import './ProfileCompletionStepper.scss';
+import { completeUserProfile } from '../../services/userService';
+import { useAppDispatch , useAppSelector } from '../../../../hooks/hooks';
 
 type PersonalDetails = {
   gender: string;
@@ -14,6 +16,7 @@ type Goal = 'Weight Gain' | 'Weight Loss' | 'Muscle Gain' | 'Strength Training';
 const ProfileCompletion: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [selectedGoal, setSelectedGoal] = useState<Goal | null>(null);
+  const dispatch = useAppDispatch()
   const [personalDetails, setPersonalDetails] = useState<PersonalDetails>({
     gender: '',
     age: '',
@@ -38,21 +41,13 @@ const ProfileCompletion: React.FC = () => {
 
   const handleSubmitProfile = async () => {
     try {
-      const response = await fetch('/api/complete-profile', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+      if (selectedGoal && Object.values(personalDetails).every((value) => value)) {
+        const profileData = {
           goal: selectedGoal,
           ...personalDetails,
-        }),
-      });
-
-      if (response.ok) {
-        window.location.href = '/home';
-      } else {
-        alert('Failed to complete profile');
+        };
+    
+        dispatch(completeUserProfile(profileData));
       }
     } catch (error) {
       console.error('Profile completion error:', error);

@@ -10,7 +10,6 @@ function App() {
       <Routes>
         <Route path="/" element={<UserLayout />}>
           <Route index element={<div>Home Page</div>} />
-          
         </Route>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<LoginPage/>}/>
