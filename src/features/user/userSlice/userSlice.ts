@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { signupUser, loginUser } from '../services/userService';
+import { signupUser, loginUser,logoutUser } from '../services/userService';
 import { completeUserProfile } from '../services/userService';
 
 interface UserState {
@@ -30,10 +30,6 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    logoutUser: (state) => {
-      state.user = null;
-      state.error = null;
-    },
   },
   extraReducers: (builder) => {
     builder
@@ -77,10 +73,23 @@ const userSlice = createSlice({
       .addCase(completeUserProfile.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload?.message || 'An error occurred during profile completion';
-      });
+      })
+
+        // Logout user logic
+        .addCase(logoutUser.pending, (state) => {
+          state.loading = true;
+        })
+        .addCase(logoutUser.fulfilled, (state) => {
+          state.loading = false;
+          state.user = null; // Clear user data on successful logout
+          state.error = null;
+        })
+        .addCase(logoutUser.rejected, (state, action: PayloadAction<any>) => {
+          state.loading = false;
+          state.error = action.payload?.message || 'An error occurred during logout';
+        });
   },
 });
 
-export const { logoutUser } = userSlice.actions;
 
 export default userSlice.reducer;

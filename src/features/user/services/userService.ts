@@ -131,3 +131,23 @@ export const completeUserProfile = createAsyncThunk(
     }
   },
 );
+
+// Logout Service 
+export const logoutUser = createAsyncThunk(
+  'user/logout',
+  async (_, { rejectWithValue }) => {
+    try {
+       await axios.post(
+        'http://localhost:3000/users/logout',
+        {},
+        { withCredentials: true }, 
+      );
+      return true ;// Handle response if needed
+    } catch (error: any) {
+      return rejectWithValue({
+        status: error.response?.status,
+        message: error.response?.data?.message || 'An error occurred during logout',
+      });
+    }
+  },
+);
